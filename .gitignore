@@ -1,0 +1,7 @@
+
+.expo/
+
+.idea/
+
+.DS_Store
+node_modules
