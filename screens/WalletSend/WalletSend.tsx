@@ -62,7 +62,7 @@ export default function WalletSendScreen({navigation}: Props) {
     }
 */
     const mockRequestRetrieveAddress = async function (_username) {
-        const path = `http://localhost:3000/users/0`;
+        const path = `http://localhost:3000/users`;
         const requestIdentity = await fetch(path);
         const requestIdentityResponse = await requestIdentity.json();
         console.log(requestIdentityResponse, "request identity response")
@@ -134,7 +134,7 @@ export default function WalletSendScreen({navigation}: Props) {
                 </SafeAreaView>
                 <Pressable
                     onPress={async () => {
-                        await mockRequestRetrieveAddress();
+                        await mockSend();
                     }}
                     style={styles.button}>
                     <Text style={styles.buttonText}>Send</Text>
