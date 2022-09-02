@@ -1,61 +1,64 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": 0,
+      "wallet": {
+        "mnemonic": "slender trap vanish there measure hero observe nation bamboo pass thunder unit thought pink panda believe agree exit umbrella demise arrive cook embark busy",
+        "seed": "fb5c6abe2c1b2232412785f425642a69b566af0f34c9b21f0f9761eb60f649aa83499f696a9fec35f69918708ff7ef06c338aba7007a843e28130e0f4aab4eb7",
+        "privateKey": "0x738a85a21eca2a566b87c41bc8017930f163a27dbbfcfc57a90cede243931526"
+      },
+      "app": {},
+      "user": {
+        "username": "Hunter",
+        "signature": "0xd054c9e68f900daddb36d77f8e062eeb32c344432cc17b4aa8b4945c4039da9d7c769d59b9b30fff58f1435154a47a0cd4e5c740faa8589a1548a83db63f0d2a1b"
+      },
+      "accounts": [
         {
-            "id": 0,
-            "wallet": {
-                "mnemonic": "slender trap vanish there measure hero observe nation bamboo pass thunder unit thought pink panda believe agree exit umbrella demise arrive cook embark busy",
-                "seed": "fb5c6abe2c1b2232412785f425642a69b566af0f34c9b21f0f9761eb60f649aa83499f696a9fec35f69918708ff7ef06c338aba7007a843e28130e0f4aab4eb7",
-                "privateKey": "0x738a85a21eca2a566b87c41bc8017930f163a27dbbfcfc57a90cede243931526"
-            },
-            "app": {},
-            "user": {
-                "username": "Hunter",
-                "signature": "0xd054c9e68f900daddb36d77f8e062eeb32c344432cc17b4aa8b4945c4039da9d7c769d59b9b30fff58f1435154a47a0cd4e5c740faa8589a1548a83db63f0d2a1b"
-            },               
-            "accounts": [
-                {
-                    "index": 0,
-                    "title": "default",
-                    "address": "0xbA1de8e9f035a19c4d571007Eeeef7331829CC24",
-                    "balance": 0,
-                    "derivationPath": "bip44Change"
-                }
-            ]
-        },
-        {
-            "id": 1,
-            "wallet": {
-                "mnemonic": "sight kick inhale future chest weekend office ensure black exercise enemy dance exact waste second among honey exhibit tobacco street lend reject cute novel",
-                "seed": "f03222aadeb90caf12dc1747ffa9169481c71c2d8c16749d545af8b9370e12cf23223c0f7be888798cb052d5c7ee392346ce555dc762756b54f41e05c33cbdc0",
-                "privateKey": "0x1310efab74dcaeefb13ab56aa3e3b5e024a5a1dde0d1e38f43277c7f36092fa2"
-            },
-            "app": {},
-            "user": {
-                "username": "Steve",
-                "signature": "0xd1b91c28030a30baf43e769222c2ecb49b2748ff07a48d195f21dc999df8068d54f40d7f4bc9b6fff5c0e551e6d7621be58ac19b9dd2981d9b7354a2896867641b"
-            },
-            "accounts": [
-                {
-                    "index": 0,
-                    "title": "default",
-                    "address": "0x4fa0c58EB83cF50eEa6E9963f2c5EBCf897a42F3",
-                    "balance": 0,
-                    "derivationPath": "bip44Change"
-                }
-            ]
+          "index": 0,
+          "title": "default",
+          "address": "0xbA1de8e9f035a19c4d571007Eeeef7331829CC24",
+          "balance": 0,
+          "derivationPath": "bip44Change"
         }
-    ],
-    "admins": [
+      ]
+    },
+    {
+      "id": 1,
+      "wallet": {
+        "mnemonic": "sight kick inhale future chest weekend office ensure black exercise enemy dance exact waste second among honey exhibit tobacco street lend reject cute novel",
+        "seed": "f03222aadeb90caf12dc1747ffa9169481c71c2d8c16749d545af8b9370e12cf23223c0f7be888798cb052d5c7ee392346ce555dc762756b54f41e05c33cbdc0",
+        "privateKey": "0x1310efab74dcaeefb13ab56aa3e3b5e024a5a1dde0d1e38f43277c7f36092fa2"
+      },
+      "app": {},
+      "user": {
+        "username": "Steve",
+        "signature": "0xd1b91c28030a30baf43e769222c2ecb49b2748ff07a48d195f21dc999df8068d54f40d7f4bc9b6fff5c0e551e6d7621be58ac19b9dd2981d9b7354a2896867641b"
+      },
+      "accounts": [
         {
-            "id": 0,
-            "name": "Hunter",
-            "privilege level": 1
-        },
-        {
-            "id": 0,
-            "name": "Steve",
-            "privilege level": 0
+          "index": 0,
+          "title": "default",
+          "address": "0x4fa0c58EB83cF50eEa6E9963f2c5EBCf897a42F3",
+          "balance": 0,
+          "derivationPath": "bip44Change"
         }
-    ]
+      ]
+    },
+    {
+      "address": "0x95eA32722C607FA8391850CD027177a0D8082C22",
+      "id": 2
+    }
+  ],
+  "admins": [
+    {
+      "id": 0,
+      "name": "Hunter",
+      "privilege level": 1
+    },
+    {
+      "id": 0,
+      "name": "Steve",
+      "privilege level": 0
+    }
+  ]
 }
-

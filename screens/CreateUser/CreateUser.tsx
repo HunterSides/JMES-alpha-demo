@@ -68,7 +68,8 @@ export default function CreateUserScreen({navigation}: Props) {
 
         const derivedAddress = account.address;
         console.log({derivedAddress})
-        const path = `http://3.72.109.56:3001/identity/${username}`;
+        //const path = `http://3.72.109.56:3001/identity/${username}`;
+        const path = `http://localhost:3000/users`;
         const rawResponse = await fetch(path, {
             method: 'POST',
             headers: {
