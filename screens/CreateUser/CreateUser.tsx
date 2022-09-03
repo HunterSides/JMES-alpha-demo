@@ -76,7 +76,11 @@ export default function CreateUserScreen({navigation}: Props) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({address:derivedAddress})
+            body: JSON.stringify({ 
+                address:derivedAddress,
+                username,
+                mnemonic,
+            })
         });
 
         await onChangeAddress(derivedAddress)

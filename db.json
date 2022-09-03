@@ -47,6 +47,17 @@
     {
       "address": "0x95eA32722C607FA8391850CD027177a0D8082C22",
       "id": 2
+    },
+    {
+      "address": "0xDA3Cf3309e3803CC974B27e070F2000cA3452c1B",
+      "username": "john",
+      "id": 3
+    },
+    {
+      "address": "0x5Aa82d054e1fa2D04ca16272AfC5A6c46Cc0Da50",
+      "username": "bob",
+      "mnemonic": "bench curtain spread income suggest tumble bike august pave ketchup reunion recycle pole stumble reject clump carbon mobile around appear oblige piano boat fruit",
+      "id": 4
     }
   ],
   "admins": [

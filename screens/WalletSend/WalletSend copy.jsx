@@ -32,46 +32,6 @@ export default function WalletSendScreen({navigation}: Props) {
     const [amount, onChangeAmount] = React.useState(0);
     const [address, onChangeAddress] = React.useState('');
 
-    const mockRequestRetrieveAddress = async function (_username) {
-        const path = `http://localhost:3000/users/${_username}`;
-        const requestIdentity = await fetch(path);
-        const requestIdentityResponse = await requestIdentity.json();
-        console.log(requestIdentityResponse, "request identity response")
-        if (!requestIdentityResponse.error) {
-            const {address} = requestIdentityResponse.identity; // method that gets address based on username
-            await onChangeAddress(address);
-
-            console.log(`Preparing tx of ${amount} to ${address}`)
-            console.log('Post request', username, amount, address)
-
-            const {account} = await accountFromPrivateKey(privateKey);
-            console.log(account);
-
-            await sendTransaction({amount, address}, account);
-            return navigation.navigate({
-                name: "WalletSendConfirm",
-                params: {
-                    username,
-                    amount,
-                    address
-                }
-            })
-        } else {
-            console.error(requestIdentityResponse.error);
-            return navigation.navigate( 'Balance');
-        }
-    }
-    const mockSend = async function () {
-        
-        return navigation.navigate( {
-            name: "WalletSendConfirm",
-            params: {
-                username,
-                amount,
-                address
-            }
-        })
-    }
     let [fontsLoaded] = useFonts({
         Comfortaa_300Light,
         Comfortaa_400Regular,
@@ -101,7 +61,7 @@ export default function WalletSendScreen({navigation}: Props) {
                         style={styles.input}
                         onChangeText={onChangeAmount}
                         value={amount}
-                        placeholder="Enter an amout"
+                        placeholder="Enter an amount"
                     />
                 </SafeAreaView>
                 <Pressable
