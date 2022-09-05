@@ -41,10 +41,36 @@ export default function WalletSendConfirmScreen({ navigation, route }: Props) {
         }
     }, [route.params]);
 
+    async function handleUpdateRecipient(){
+        const recipient = `http://localhost:3000/users?address=${recipientAddress}`
+        const rawResponse = await fetch(recipient)
+        const parsedResponse = await rawResponse.json()
+        const balance = parsedResponse[0].wallet.balance
+        const updatedBalance = balance + recipientAmount
+        console.log(updatedBalance)
+        const updateRecipient = await fetch(recipient, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                address:recipientAddress,
+                wallet: {
+                    balance:updatedBalance,
+                }
+            })
+        });
+        const contentResponse = await updateRecipient.json();
+        console.log(contentResponse);
+
+    }
     async function sendTransaction(){
         console.log('====')
         console.log('==== SEND TRANSACTION')
         console.log(`Sending ${recipientAmount} to ${recipientAddress}`);
+
+        await handleUpdateRecipient()
         return navigation.navigate("Balance")
     }
 

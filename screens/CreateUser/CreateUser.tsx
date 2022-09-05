@@ -3,7 +3,7 @@ import {StatusBar} from 'expo-status-bar';
 import {Platform, StyleSheet, Pressable, TextInput, SafeAreaView} from 'react-native';
 
 import {Text, View} from '../../components/Themed/Themed';
-import {useStoreActions} from "../../hooks/storeHooks";
+import {useStoreActions, useStoreState} from "../../hooks/storeHooks";
 import React, {useEffect} from "react";
 import {
     accountFromSeed,
@@ -27,6 +27,7 @@ import {
 import {Navigation} from "../../types";
 
 
+
 type Props = {
     navigation: Navigation;
 };
@@ -47,14 +48,13 @@ export default function CreateUserScreen({navigation}: Props) {
     const addWallet = useStoreActions((actions) => actions.addWallet);
     const addUser = useStoreActions((actions) => actions.addUser);
     const addAccount = useStoreActions((actions) => actions.addAccount);
+    //const balanceState = useStoreState((state) => state.accounts[0].balance)
 
     const performRegister = async function () {
         const seed = await mnemonicToSeed(mnemonic);
         const account = await accountFromSeed(seed);
-
+        const balance = 100000
         const {signature} = await signMessage('jmesworld', account.privateKey);
-        console.log('PRIVATEKEY CREATE USER', account.privateKey);
-        console.log(signature)
 
         await addUser({
             username,
@@ -67,8 +67,6 @@ export default function CreateUserScreen({navigation}: Props) {
         });
 
         const derivedAddress = account.address;
-        console.log({derivedAddress})
-        //const path = `http://3.72.109.56:3001/identity/${username}`;
         const path = `http://localhost:3000/users`;
         const rawResponse = await fetch(path, {
             method: 'POST',
@@ -76,17 +74,20 @@ export default function CreateUserScreen({navigation}: Props) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 address:derivedAddress,
                 username,
-                mnemonic,
+                wallet: {
+                    balance,
+                    username,
+                    mnemonic,
+                }
             })
         });
 
         await onChangeAddress(derivedAddress)
         await addAccount({index:0, title: 'default', address: derivedAddress});
 
-        console.log({path});
         const contentResponse = await rawResponse.json();
         console.log(contentResponse);
 
@@ -95,6 +96,7 @@ export default function CreateUserScreen({navigation}: Props) {
 
         }, 5000)
     }
+
     useEffect(() => {
         async function generate() {
             const mnemonic = await generateMnemonic();

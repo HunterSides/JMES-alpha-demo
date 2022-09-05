@@ -19,6 +19,7 @@ export const DERIVATION_PATH = {
 };
 
 const JSON_RPC_PATH = 'http://3.72.109.56:8545';
+
 // const REST_PATH = '52.59.220.121'
 // "mountain toilet almost birth forest ghost hand drum success enhance garment slice pipe option eager palace adult bridge speak gasp leopard jealous insane drama"
 
@@ -162,7 +163,7 @@ const signMessage = (message: string, privateKey: string,)=>{
     console.log(web3.eth.accounts.recover(message, signatureData.signature));
     return signatureData
 }
-const sendTransaction = async (transactionParams ={}, account)=>{
+const sendTransaction = async (transactionParams = {}, account)=>{
     // @ts-ignore
     const {address, amount} = transactionParams
     const web3 = new Web3(
@@ -183,7 +184,7 @@ const sendTransaction = async (transactionParams ={}, account)=>{
 
     try {
         console.log(account);
-        const tx = await account.signTransaction({
+        /*const tx = await account.signTransaction({
             to: address,
             from: account.address,
             // nonce: datas.nonce,
@@ -194,7 +195,7 @@ const sendTransaction = async (transactionParams ={}, account)=>{
         console.log(tx);
         console.log(tx.rawTransaction);
         const res = await web3.eth.sendSignedTransaction(tx.rawTransaction);
-        return res;
+        return res;*/
     } catch (e){
         console.error(e);
         throw e;

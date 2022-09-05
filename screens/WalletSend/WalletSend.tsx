@@ -31,47 +31,6 @@ export default function WalletSendScreen({navigation}: Props) {
     const [username, onChangeUsername] = React.useState('');
     const [amount, onChangeAmount] = React.useState(0);
     const [address, onChangeAddress] = React.useState('');
-
-    const mockRequestRetrieveAddress = async function (_username) {
-        const path = `http://localhost:3000/users/${_username}`;
-        const requestIdentity = await fetch(path);
-        const requestIdentityResponse = await requestIdentity.json();
-        console.log(requestIdentityResponse, "request identity response")
-        if (!requestIdentityResponse.error) {
-            const {address} = requestIdentityResponse.identity; // method that gets address based on username
-            await onChangeAddress(address);
-
-            console.log(`Preparing tx of ${amount} to ${address}`)
-            console.log('Post request', username, amount, address)
-
-            const {account} = await accountFromPrivateKey(privateKey);
-            console.log(account);
-
-            await sendTransaction({amount, address}, account);
-            return navigation.navigate({
-                name: "WalletSendConfirm",
-                params: {
-                    username,
-                    amount,
-                    address
-                }
-            })
-        } else {
-            console.error(requestIdentityResponse.error);
-            return navigation.navigate( 'Balance');
-        }
-    }
-    const mockSend = async function () {
-        
-        return navigation.navigate( {
-            name: "WalletSendConfirm",
-            params: {
-                username,
-                amount,
-                address
-            }
-        })
-    }
     let [fontsLoaded] = useFonts({
         Comfortaa_300Light,
         Comfortaa_400Regular,
@@ -81,6 +40,39 @@ export default function WalletSendScreen({navigation}: Props) {
         Roboto_900Black
     });
 
+    const RequestRetrieveAddress = async function (_username) {
+        const path = `http://localhost:3000/users?username=${_username}`;
+        const requestIdentity = await fetch(path);
+        const parsedRequest = await requestIdentity.json();
+
+        if (!parsedRequest.error) {
+          
+            const address =  parsedRequest[0].address
+
+            await onChangeAddress(address);
+
+            console.log(`Preparing tx of ${amount} to ${address}`)
+            console.log('Post request', username, amount, address)
+            // @ts-ignore
+            const account = await accountFromPrivateKey(privateKey);
+            console.log("account", account);
+
+            await sendTransaction({amount, address}, account);
+            // @ts-ignore
+            return navigation.navigate({
+                name: "WalletSendConfirm",
+                params: {
+                    username,
+                    amount,
+                    address
+                }
+            })
+        } else {
+            console.error(parsedRequest.error);
+            return navigation.navigate( 'Balance');
+        }
+    }
+  
     return (
         <View style={styles.container}>
             <Background4>
@@ -97,16 +89,17 @@ export default function WalletSendScreen({navigation}: Props) {
                 </SafeAreaView>
                 <Text style={styles.title}>Amount</Text>
                 <SafeAreaView>
+                    
                     <TextInput
                         style={styles.input}
                         onChangeText={onChangeAmount}
                         value={amount}
-                        placeholder="Enter an amout"
+                        placeholder="Enter an amount"
                     />
                 </SafeAreaView>
                 <Pressable
                     onPress={async () => {
-                        await mockSend();
+                        await RequestRetrieveAddress(username);
                     }}
                     style={styles.button}>
                     <Text style={styles.buttonText}>Send</Text>

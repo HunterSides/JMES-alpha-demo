@@ -27,18 +27,11 @@ type Props = {
 };
 
 export default function WalletScreen({ navigation }: Props) {
-
+    
     const address = useStoreState((state) => state.accounts[0].address)
     const balanceState = useStoreState((state) => state.accounts[0].balance)
-
-
+    const account = useStoreState((state) => state.accounts[0])
     const [shouldFetch, setShouldFetch] = useState(true);
-
-    function updateStoreState() {
-        // console.log('UpdateStoreState');
-        // updateAccount({...account, balance: balance})
-    }
-
     const [balance, setBalance] = useState(balanceState);
     const [balanceEur, setBalanceEur] = useState(balanceState);
 
@@ -50,14 +43,54 @@ export default function WalletScreen({ navigation }: Props) {
         Comfortaa_700Bold,
         Roboto_900Black
     });
+    
+    function updateStoreState() {
+        // console.log('UpdateStoreState');
+        // updateAccount({...account, balance: balance})
+    }
+
+    async function fetchFromLocal() {
+
+        const path = `http://localhost:3000/users?address=${address}`;
+
+        const rawResponse = await fetch(path, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+        });
+        const parsedResponse = await rawResponse.json()
+        const balance = parsedResponse[0].wallet.balance.toString()
+        console.log("balance:", balance)
+        setBalance(balance);
+
+        const convertedBalance = (parseInt(balance) * 0.1412840103).toString();
+
+        console.log({convertedBalance});
+       
+        setBalanceEur(parseFloat(convertedBalance).toFixed(2))
+    }
 
     useEffect(() => {
+        fetchFromLocal()
+        setInterval(()=>{
+            if(shouldFetch){
+                fetchFromLocal();
+            }
+            console.log('interval');
+        }, 10*3000)
+    },[updateStoreState])
+
+   /* useEffect(() => {
         async function fetch() {
             const fetchedBalance = await fetchAddressBalance(address);
             console.log({fetchedBalance});
             setBalance(Web3.utils.fromWei(fetchedBalance, 'ether'));
-            const convertedBalance = (parseInt(fetchedBalance) * 0.1412840103).toString();
 
+            const convertedBalance = (parseInt(fetchedBalance) * 0.1412840103).toString();
+            
             console.log({convertedBalance});
             setBalanceEur(parseFloat(Web3.utils.fromWei(convertedBalance, 'ether')).toFixed(2))
 
@@ -71,6 +104,7 @@ export default function WalletScreen({ navigation }: Props) {
             console.log('interval');
         }, 10*1000)
     }, [updateStoreState]);
+*/
     return (
         <View style={styles.container}>
             <Background4>
