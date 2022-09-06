@@ -62,7 +62,7 @@ export default function WalletScreen({ navigation }: Props) {
 
         });
         const parsedResponse = await rawResponse.json()
-        const balance = parsedResponse[0].wallet.balance.toString()
+        const balance = parsedResponse[0].balance.toString()
         console.log("balance:", balance)
         setBalance(balance);
 

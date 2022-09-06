@@ -1,24 +1,5 @@
 {
   "users": [
-    {
-      "address": "0x60BfeE5084587fd28A1842ec9D836f397Ce0b375",
-      "username": "Hunter",
-      "wallet": {
-        "balance": 100000,
-        "username": "Hunter",
-        "mnemonic": "whisper source auto pave blossom share burst despair month park mass pyramid tower enact still permit palace census elite isolate path like delay october"
-      },
-      "id": 1
-    },
-    {
-      "address": "0x1b105BEF62f512c7d57e1165AD96e3Ba16D88137",
-      "username": "Dez",
-      "wallet": {
-        "balance": 100000,
-        "username": "Dez",
-        "mnemonic": "security habit coconut pause what sweet milk inspire gym piano pattern charge month silver fitness original kitten soda afraid vote enough nuclear olive alien"
-      },
-      "id": 2
-    }
+   
   ]
 }

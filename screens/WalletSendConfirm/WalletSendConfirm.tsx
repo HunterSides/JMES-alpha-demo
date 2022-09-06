@@ -28,7 +28,7 @@ type Props = {
 
 export default function WalletSendConfirmScreen({ navigation, route }: Props) {
     const [recipientUsername, setRecipientUsername] = useState('');
-    const [recipientAmount, setRecipientAmount] = useState(0);
+    const [recipientAmount, setRecipientAmount] = useState();
     const [recipientAddress, setRecipientAddress] = useState('');
 
     useEffect(() => {
@@ -42,29 +42,30 @@ export default function WalletSendConfirmScreen({ navigation, route }: Props) {
     }, [route.params]);
 
     async function handleUpdateRecipient(){
-        const recipient = `http://localhost:3000/users?address=${recipientAddress}`
-        const rawResponse = await fetch(recipient)
-        const parsedResponse = await rawResponse.json()
-        const balance = parsedResponse[0].wallet.balance
-        const updatedBalance = balance + recipientAmount
-        console.log(updatedBalance)
-        const updateRecipient = await fetch(recipient, {
-            method: 'PUT',
+    
+        const getRecipient = await fetch(`http://localhost:3000/users?address=${recipientAddress}`)
+        const parsedResponse = await getRecipient.json()
+        const updatedBalance = await parseInt(parsedResponse[0].balance) + parseInt(recipientAmount)
+
+        const recipientPathFromId = `http://localhost:3000/users/${parsedResponse[0].id}`
+        
+        const updateRecipient = await fetch(recipientPathFromId, {
+            method: 'PATCH',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                address:recipientAddress,
-                wallet: {
+
                     balance:updatedBalance,
-                }
+                
             })
         });
+        
         const contentResponse = await updateRecipient.json();
-        console.log(contentResponse);
-
+        console.log(contentResponse, "ContentResponse");
     }
+
     async function sendTransaction(){
         console.log('====')
         console.log('==== SEND TRANSACTION')

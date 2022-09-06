@@ -53,7 +53,7 @@ export default function CreateUserScreen({navigation}: Props) {
     const performRegister = async function () {
         const seed = await mnemonicToSeed(mnemonic);
         const account = await accountFromSeed(seed);
-        const balance = 100000
+        const balance = 10000
         const {signature} = await signMessage('jmesworld', account.privateKey);
 
         await addUser({
@@ -77,11 +77,9 @@ export default function CreateUserScreen({navigation}: Props) {
             body: JSON.stringify({
                 address:derivedAddress,
                 username,
-                wallet: {
-                    balance,
-                    username,
-                    mnemonic,
-                }
+                balance,
+                mnemonic,
+                
             })
         });
 

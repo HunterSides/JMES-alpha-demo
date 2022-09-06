@@ -88,7 +88,7 @@ const accountFromPrivateKey = (
     derivationPath: '',
     accountIndex: 0
 ) => {
-    console.log(`Derive from privateKey`, privateKey);
+    //console.log(`Derive from privateKey`, privateKey);
 
     const web3 = new Web3(
         new Web3.providers.HttpProvider(JSON_RPC_PATH, { timeout: 10000 })
@@ -96,7 +96,7 @@ const accountFromPrivateKey = (
     // @ts-ignore
     const account = web3.eth.accounts.privateKeyToAccount(privateKey);
     // console.log({account});
-    console.log('Derived address:', {address: account.address})
+    //console.log('Derived address:', {address: account.address})
     const {address, encrypt, sign, signTransaction} = account;
     // @ts-ignore
     return {accountIndex, walletIndex: 0, address, privateKey, account};
@@ -172,18 +172,18 @@ const sendTransaction = async (transactionParams = {}, account)=>{
     if(!address) throw new Error('Missing address');
     if(!amount) throw new Error('Missing amount');
 
-    const value = Web3.utils.toWei(amount.toString(), 'ether').toString()
+    //const value = Web3.utils.toWei(amount.toString(), 'ether').toString()
 
     // const balance = await fetchAddressBalance(this.account.address)
     // if(balance<amount){
     //     throw new Error(`Unsufficiant amount ${balance}<${amount}`)
     // }
-    console.log(`Sending ${value} to ${address} from ${account.address}`)
+    //console.log(`Sending ${value} to ${address} from ${account.address}`)
     // console.log(web3.eth.accounts.defaultAccount);
     // console.log({balance, value, address})
 
     try {
-        console.log(account);
+        console.log("Account", account);
         /*const tx = await account.signTransaction({
             to: address,
             from: account.address,

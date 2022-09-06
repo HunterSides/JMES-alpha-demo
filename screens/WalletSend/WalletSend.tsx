@@ -40,7 +40,7 @@ export default function WalletSendScreen({navigation}: Props) {
         Roboto_900Black
     });
 
-    const RequestRetrieveAddress = async function (_username) {
+    const handleSend = async function (_username) {
         const path = `http://localhost:3000/users?username=${_username}`;
         const requestIdentity = await fetch(path);
         const parsedRequest = await requestIdentity.json();
@@ -51,11 +51,10 @@ export default function WalletSendScreen({navigation}: Props) {
 
             await onChangeAddress(address);
 
-            console.log(`Preparing tx of ${amount} to ${address}`)
-            console.log('Post request', username, amount, address)
+            console.log(`Preparing tx of ${amount} $JMES to User: ${username}, Address: ${address}`)
+
             // @ts-ignore
             const account = await accountFromPrivateKey(privateKey);
-            console.log("account", account);
 
             await sendTransaction({amount, address}, account);
             // @ts-ignore
@@ -99,7 +98,7 @@ export default function WalletSendScreen({navigation}: Props) {
                 </SafeAreaView>
                 <Pressable
                     onPress={async () => {
-                        await RequestRetrieveAddress(username);
+                        await handleSend(username);
                     }}
                     style={styles.button}>
                     <Text style={styles.buttonText}>Send</Text>

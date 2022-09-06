@@ -8,7 +8,7 @@ import {
     Action,
     persist,
 } from "easy-peasy";
-import storage from "../utils/storage";
+import storage from "../storage";
 import {useStoreState} from "../hooks/storeHooks";
 
 
