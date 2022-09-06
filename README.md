@@ -16,3 +16,5 @@
 TODO:
     - Add additional validations when sending and receiving JMES 
     - update DB & interface to reflect users balance after a transaction has occurred
+    - abstract query functions and all crud functionality (possibly using mongoose models)
+    - launch server and app in parallel (concurrently)
