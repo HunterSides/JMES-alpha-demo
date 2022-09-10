@@ -3,7 +3,7 @@ import {StatusBar} from 'expo-status-bar';
 import {Platform, StyleSheet, Pressable, Image} from 'react-native';
 
 import {Text, View} from '../../components/Themed/Themed';
-import {useStoreState} from "../../hooks/storeHooks";
+import {useStoreState, useStoreActions} from "../../hooks/storeHooks";
 import {useEffect, useState} from "react";
 import {fetchAddressBalance} from "../../utils";
 import Background4 from "../../components/Background4/Background4";
@@ -31,6 +31,7 @@ export default function WalletScreen({ navigation }: Props) {
     const address = useStoreState((state) => state.accounts[0].address)
     const balanceState = useStoreState((state) => state.accounts[0].balance)
     const account = useStoreState((state) => state.accounts[0])
+    const updateAccount = useStoreActions((actions) => actions.updateAccount);
     const [shouldFetch, setShouldFetch] = useState(true);
     const [balance, setBalance] = useState(balanceState);
     const [balanceEur, setBalanceEur] = useState(balanceState);
@@ -45,8 +46,8 @@ export default function WalletScreen({ navigation }: Props) {
     });
     
     function updateStoreState() {
-        // console.log('UpdateStoreState');
-        // updateAccount({...account, balance: balance})
+        console.log('UpdateStoreState');
+       updateAccount({...account, balance: balance})
     }
 
     async function fetchFromLocal() {
@@ -80,7 +81,7 @@ export default function WalletScreen({ navigation }: Props) {
                 fetchFromLocal();
             }
             console.log('interval');
-        }, 10*3000)
+        }, 10*1000)
     },[updateStoreState])
 
    /* useEffect(() => {

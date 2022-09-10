@@ -55,7 +55,7 @@ export default function WalletSendScreen({navigation}: Props) {
 
             // @ts-ignore
             const account = await accountFromPrivateKey(privateKey);
-
+            
             await sendTransaction({amount, address}, account);
             // @ts-ignore
             return navigation.navigate({

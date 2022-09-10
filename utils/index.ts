@@ -19,7 +19,7 @@ export const DERIVATION_PATH = {
 };
 
 const JSON_RPC_PATH = 'http://3.72.109.56:8545';
-
+const LOCAL_SERVER_PATH = 'http://localhost:3000'
 // const REST_PATH = '52.59.220.121'
 // "mountain toilet almost birth forest ghost hand drum success enhance garment slice pipe option eager palace adult bridge speak gasp leopard jealous insane drama"
 
@@ -45,21 +45,11 @@ const accountFromSeed = async (
     derivationPath: string,
     accountIndex: 0
 ) => {
-    // console.log(`Derive from seed`, seed);
-    // const derivedSeed = deriveSeed(
-    //     seed,
-        // walletIndex,
-        // 0,
-        // 0
-        // accountIndex
-        // 0
-        // derivationPath,
-    // );
+
     const web3 = new Web3(
         new Web3.providers.HttpProvider(JSON_RPC_PATH, { timeout: 10000 })
     );
-    // console.log({derivedSeed});
-    // @ts-ignore
+
     const rootKey = await bip32.fromSeed(Buffer.from(seed, 'hex'));
     const derivedKey = rootKey.derivePath('m/0');
 
@@ -71,11 +61,7 @@ const accountFromSeed = async (
     // @ts-ignore
     return {accountIndex, walletIndex: 0, address, privateKey, account};
     // @ts-ignore
-    // web3.eth.getAccounts(console.log);
-
-    // const keyPair = nacl.sign.keyPair.fromSeed(derivedSeed);
-
-    // const acc = new solanaWeb3.Keypair(keyPair);
+    
     const acc = {
         stuff: true
     }
@@ -111,6 +97,15 @@ const accountFromPrivateKey = (
     }
     return acc;
 };
+
+const accountFromAddress = async (address: string) => {
+    const response = await fetch(
+        `${LOCAL_SERVER_PATH}/users?address=${address}`)
+
+    const account = await response.json()
+    console.log(account)
+    return account
+}
 
 const maskedAddress = (address: string) => {
     if (!address) return;
@@ -213,6 +208,8 @@ const sign = (message: string, privateKey: string,)=>{
     return signatureData
 }
 export {
+
+    accountFromAddress,
     fetchAddressBalance,
     accountFromPrivateKey,
     generateMnemonic,

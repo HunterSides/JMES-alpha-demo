@@ -1,5 +1,18 @@
 {
   "users": [
-   
+    {
+      "address": "0xDDBC40A8587EA77eF3DAdFB98613744ba88A9F0D",
+      "username": "Hunter",
+      "balance": 28050,
+      "mnemonic": "pigeon black network obscure grunt author amazing silver initial bonus execute grant acoustic hip under arrow push journey maximum choose trust build fine lyrics",
+      "id": 1
+    },
+    {
+      "address": "0xEaE3b0681855226b91B37a0aA0e5451B2C919af6",
+      "username": "Dez",
+      "balance": -5300,
+      "mnemonic": "shrimp plastic afford ignore bone cabin useful hunt point nominee message evoke cherry athlete brother board hand lake cake sense topic fitness yard ancient",
+      "id": 2
+    }
   ]
 }

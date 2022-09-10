@@ -3,7 +3,11 @@ import {StatusBar} from 'expo-status-bar';
 import {Platform, StyleSheet, Pressable} from 'react-native';
 import {Text, View} from '../../components/Themed/Themed';
 import {useEffect, useState} from "react";
+import {
+    accountFromAddress,
 
+} from "../../utils";
+import {useStoreState, useStoreActions} from "../../hooks/storeHooks";
 import Background4 from "../../components/Background4/Background4";
 import {
     useFonts,
@@ -27,53 +31,66 @@ type Props = {
 
 
 export default function WalletSendConfirmScreen({ navigation, route }: Props) {
-    const [recipientUsername, setRecipientUsername] = useState('');
-    const [recipientAmount, setRecipientAmount] = useState();
-    const [recipientAddress, setRecipientAddress] = useState('');
 
-    useEffect(() => {
-        console.log('params',route.params)
-        console.log('match',route.match)
-        if(route.params){
-            if(route.params.address)  setRecipientAddress(route.params.address);
-            if(route.params.username)  setRecipientUsername(route.params.username);
-            if(route.params.amount)  setRecipientAmount(route.params.amount);
+        const initiatorAddress = useStoreState((state) => state.accounts[0].address)
+        const [recipientUsername, setRecipientUsername] = useState('');
+        const [recipientAmount, setRecipientAmount] = useState();
+        const [recipientAddress, setRecipientAddress] = useState('');
+        
+        useEffect(() => {
+            console.log('params',route.params)
+            console.log('match',route.match)
+            if(route.params){
+                if(route.params.address)  setRecipientAddress(route.params.address);
+                if(route.params.username)  setRecipientUsername(route.params.username);
+                if(route.params.amount)  setRecipientAmount(route.params.amount);
+            }
+        }, [route.params]);
+
+        async function handleRecipientUpdate(address: string) {
+            const account = await accountFromAddress(address)
+            const updatedBalance = await parseInt(account[0].balance) + parseInt(recipientAmount)
+
+            await fetch(`http://localhost:3000/users/${account[0].id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                        balance:updatedBalance,
+                })
+            });
+
         }
-    }, [route.params]);
 
-    async function handleUpdateRecipient(){
-    
-        const getRecipient = await fetch(`http://localhost:3000/users?address=${recipientAddress}`)
-        const parsedResponse = await getRecipient.json()
-        const updatedBalance = await parseInt(parsedResponse[0].balance) + parseInt(recipientAmount)
+        async function handleInitiatorUpdate(address: string) {
+            const account = await accountFromAddress(address)
+            const updatedBalance = await parseInt(account[0].balance) - parseInt(recipientAmount)
 
-        const recipientPathFromId = `http://localhost:3000/users/${parsedResponse[0].id}`
-        
-        const updateRecipient = await fetch(recipientPathFromId, {
-            method: 'PATCH',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
+            await fetch(`http://localhost:3000/users/${account[0].id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                        balance:updatedBalance,
+                })
+            });
 
-                    balance:updatedBalance,
-                
-            })
-        });
-        
-        const contentResponse = await updateRecipient.json();
-        console.log(contentResponse, "ContentResponse");
-    }
+        }
 
-    async function sendTransaction(){
-        console.log('====')
-        console.log('==== SEND TRANSACTION')
-        console.log(`Sending ${recipientAmount} to ${recipientAddress}`);
+        async function sendTransaction(){
+            console.log('====')
+            console.log('==== SEND TRANSACTION')
+            console.log(`Sending ${recipientAmount} to ${recipientAddress}`);
+            console.log(`Initiator Address: ${initiatorAddress}`)
 
-        await handleUpdateRecipient()
-        return navigation.navigate("Balance")
-    }
+            await handleRecipientUpdate(recipientAddress)
+            await handleInitiatorUpdate(initiatorAddress)
+            return navigation.navigate("Balance")
+        }
 
     let [fontsLoaded] = useFonts({
         Comfortaa_300Light,
