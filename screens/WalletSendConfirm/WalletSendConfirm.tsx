@@ -46,7 +46,8 @@ export default function WalletSendConfirmScreen({ navigation, route }: Props) {
                 if(route.params.amount)  setRecipientAmount(route.params.amount);
             }
         }, [route.params]);
-
+        
+//refactor to combine update functions
         async function handleRecipientUpdate(address: string) {
             const account = await accountFromAddress(address)
             const updatedBalance = await parseInt(account[0].balance) + parseInt(recipientAmount)

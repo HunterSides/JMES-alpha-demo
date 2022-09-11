@@ -10,9 +10,16 @@
     {
       "address": "0xEaE3b0681855226b91B37a0aA0e5451B2C919af6",
       "username": "Dez",
-      "balance": -5300,
+      "balance": -5800,
       "mnemonic": "shrimp plastic afford ignore bone cabin useful hunt point nominee message evoke cherry athlete brother board hand lake cake sense topic fitness yard ancient",
       "id": 2
+    },
+    {
+      "address": "0x49bD3FE518079310f7130C36985a3986a71ADaE8",
+      "username": "Button",
+      "balance": 10500,
+      "mnemonic": "weekend tired valley roast bike enemy book volcano tray rain cry manual fame equip retire bicycle cushion cube sample grid whip energy stumble uniform",
+      "id": 3
     }
   ]
 }
