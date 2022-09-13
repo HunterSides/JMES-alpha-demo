@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Text, StyleSheet, Button } from 'react-native';
-import { IStackScreenProps } from '../../lib/IStackScreenProps';
-import { IQRCodePayload } from '../../lib/IQRCodePayload';
+import { IStackScreenProps } from '../library/IStackScreenProps';
+import { IQRCodePayload } from '../library/IQRCodePayload';
 
 const ScanScreen: React.FunctionComponent<IStackScreenProps> = (props) => {
     const [loading, setLoading] = useState(true);

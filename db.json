@@ -1,25 +1,39 @@
 {
   "users": [
     {
-      "address": "0xDDBC40A8587EA77eF3DAdFB98613744ba88A9F0D",
+      "address": "0x005069d66524DC7fba75B622F4be84E3fB0B280a",
       "username": "Hunter",
-      "balance": 28050,
-      "mnemonic": "pigeon black network obscure grunt author amazing silver initial bonus execute grant acoustic hip under arrow push journey maximum choose trust build fine lyrics",
+      "balance": 11500,
+      "mnemonic": "cool chicken venture lucky vicious pluck twelve level iron cook eternal artefact grain sister ensure note spawn bike above distance ostrich crazy awkward foot",
       "id": 1
     },
     {
-      "address": "0xEaE3b0681855226b91B37a0aA0e5451B2C919af6",
+      "address": "0xDB8f482dCa6600a595DdA156Cd86ff36bb4B392D",
       "username": "Dez",
-      "balance": -5800,
-      "mnemonic": "shrimp plastic afford ignore bone cabin useful hunt point nominee message evoke cherry athlete brother board hand lake cake sense topic fitness yard ancient",
+      "balance": 9500,
+      "mnemonic": "sheriff suspect roast when garlic hour castle drastic pill flash silent antenna stove frown relax plug earth hamster tragic title width flower lab surface",
       "id": 2
     },
     {
-      "address": "0x49bD3FE518079310f7130C36985a3986a71ADaE8",
-      "username": "Button",
-      "balance": 10500,
-      "mnemonic": "weekend tired valley roast bike enemy book volcano tray rain cry manual fame equip retire bicycle cushion cube sample grid whip energy stumble uniform",
+      "address": "0x095D70182d0D929E8f9F89150931463F7Db92D63",
+      "username": "Hunter",
+      "balance": 10000,
+      "mnemonic": "grit stock original clog across have text hold margin access rookie great motor business business north agent cloud clutch clarify roof book matter orchard",
       "id": 3
+    },
+    {
+      "address": "0x4e1DD162CEB2080cF847b6d3d8819219b8B52a67",
+      "username": "Hunter",
+      "balance": 10000,
+      "mnemonic": "school fantasy magic fox net waste success knock spin movie digital poem art sausage track salute reveal urge name cute husband green wolf absent",
+      "id": 4
+    },
+    {
+      "address": "0x883F63A83Ef0a7053580F62428DfA56BAb5476fe",
+      "username": "Dez",
+      "balance": 9000,
+      "mnemonic": "guard chicken assault rubber split total piece caution cage cash wish space sting machine limit defense top scare retreat slush empty label gym pizza",
+      "id": 5
     }
   ]
 }

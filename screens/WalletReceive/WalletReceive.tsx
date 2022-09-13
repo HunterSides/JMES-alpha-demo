@@ -3,6 +3,7 @@ import {Platform, StyleSheet,  Pressable} from 'react-native';
 import {Text, View} from '../../components/Themed/Themed';
 import {useStoreState} from "../../hooks/storeHooks";
 import Background4 from "../../components/Background4/Background4";
+import QRCodeScreen from './QRCode';
 import {
     useFonts,
     Comfortaa_300Light,
@@ -56,6 +57,7 @@ export default function WalletReceiveScreen({ navigation }: Props) {
                     style={styles.button}>
                     <Text style={styles.buttonText}>Request from Faucet</Text>
                 </Pressable>
+                <QRCodeScreen navigation={navigation} />
                 {/* Use a light status bar on iOS to account for the black space above the modal */}
                 <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'}/>
             </Background4>
