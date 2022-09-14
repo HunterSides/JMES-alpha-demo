@@ -19,6 +19,7 @@ import {
     Roboto_900Black
 } from '@expo-google-fonts/roboto';
 import Web3 from "web3";
+import { LOCAL_SERVER_PATH } from '../../utils';
 import {Navigation} from "../../types";
 import * as React from "react";
 
@@ -28,13 +29,13 @@ type Props = {
 
 export default function WalletScreen({ navigation }: Props) {
     
-    const address = useStoreState((state) => state.accounts[0].address)
-    const balanceState = useStoreState((state) => state.accounts[0].balance)
+   
     const account = useStoreState((state) => state.accounts[0])
     const updateAccount = useStoreActions((actions) => actions.updateAccount);
     const [shouldFetch, setShouldFetch] = useState(true);
-    const [balance, setBalance] = useState(balanceState);
-    const [balanceEur, setBalanceEur] = useState(balanceState);
+    const [balance, setBalance] = useState(account.balanceState);
+    console.log(account.balanceState, "Account.balanceState")
+    const [balanceEur, setBalanceEur] = useState(account.balanceState);
 
     let [fontsLoaded] = useFonts({
         Comfortaa_300Light,
@@ -52,9 +53,9 @@ export default function WalletScreen({ navigation }: Props) {
 
     async function fetchFromLocal() {
 
-        const path = `http://localhost:3000/users?address=${address}`;
+        const path = `${LOCAL_SERVER_PATH}/users?address=${account.address}`;
 
-        const rawResponse = await fetch(path, {
+        const rawResponse = await fetch(path , {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

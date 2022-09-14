@@ -1,4 +1,4 @@
 export interface IQRCodePayload {
-    name: string;
-    number: string;
+    address: string
+    amount: string
 }

@@ -1,9 +1,10 @@
 import {StatusBar} from 'expo-status-bar';
-import {Platform, StyleSheet,  Pressable} from 'react-native';
+import {Platform, StyleSheet,  Pressable, TextInput, SafeAreaView} from 'react-native';
 import {Text, View} from '../../components/Themed/Themed';
-import {useStoreState} from "../../hooks/storeHooks";
+import {useStoreState, useStoreActions} from "../../hooks/storeHooks";
 import Background4 from "../../components/Background4/Background4";
-import QRCodeScreen from './QRCode';
+import GeneratedQRCode from '../../components/QRCode/QRCode';
+
 import {
     useFonts,
     Comfortaa_300Light,
@@ -17,6 +18,7 @@ import {
 } from '@expo-google-fonts/roboto';
 
 import {Navigation} from "../../types";
+import { useEffect, useState } from 'react';
 
 type Props = {
     navigation: Navigation;
@@ -24,7 +26,22 @@ type Props = {
 
 
 export default function WalletReceiveScreen({ navigation }: Props) {
+
+
+    const address = useStoreState((state) => state.accounts[0].address)
     const username = useStoreState((state) => state.user.username)
+    const [payload, setPayload] = useState(null)
+    const [amount, setAmount] = useState('');
+
+    const handleGenerateQR = async () => {
+        if (amount) {
+            setPayload({ amount:amount, address:address})
+        }
+        else{
+            alert("Please enter a valid Amount");
+          }
+    }
+
     const handleRequestBalance = async () => {
         return await requestReceiveFromFaucet();
     }
@@ -36,6 +53,7 @@ export default function WalletReceiveScreen({ navigation }: Props) {
         console.log(await requestFaucet.json());
         return navigation.navigate("Balance");
     }
+
 
     let [fontsLoaded] = useFonts({
         Comfortaa_300Light,
@@ -51,13 +69,30 @@ export default function WalletReceiveScreen({ navigation }: Props) {
         <View style={styles.container}>
             <Background4>
                 <Text style={styles.title}>Receive JMES</Text>
-                <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)"/>
                 <Pressable
                     onPress={() => handleRequestBalance() }
                     style={styles.button}>
                     <Text style={styles.buttonText}>Request from Faucet</Text>
                 </Pressable>
-                <QRCodeScreen navigation={navigation} />
+                <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)"/>
+               
+                <SafeAreaView>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={setAmount}
+                        value={amount}
+                        placeholder="Enter an amount"
+                    />
+                    {payload ? 
+                        <GeneratedQRCode payload={payload}/> 
+                    : null
+                    }
+                </SafeAreaView>
+                <Pressable
+                    onPress={() => handleGenerateQR() }
+                    style={styles.button}>
+                    <Text style={styles.buttonText}>Generate QR Code</Text>
+                </Pressable>
                 {/* Use a light status bar on iOS to account for the black space above the modal */}
                 <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'}/>
             </Background4>
@@ -100,6 +135,13 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 36,
         fontFamily: 'Comfortaa_300Light',
+    },
+    input: {
+        backgroundColor: "white",
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
     },
     secondTitle:{
         fontSize: 36,

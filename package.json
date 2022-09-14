@@ -67,7 +67,7 @@
     "react-native-screens": "~3.11.1",
     "react-native-status-bar-height": "^2.6.0",
     "react-native-stream": "^0.1.9",
-    "react-native-svg": "^12.4.4",
+    "react-native-svg": "12.3.0",
     "react-native-tcp": "^4.0.0",
     "react-native-web": "0.17.7",
     "react-redux": "^8.0.2",
