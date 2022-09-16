@@ -18,24 +18,40 @@ import {
 } from '@expo-google-fonts/roboto';
 
 import {Navigation} from "../../types";
+import {IQRCodePayload } from "../../lib/IQRCodePayload"
+import { SCHEMA_PREFIX, notateWeiValue } from '../../utils';
 import { useEffect, useState } from 'react';
+import Web3 from 'web3';
 
 type Props = {
     navigation: Navigation;
 };
 
+    // QRCODE URI Syntax: schema_prefix target_address [ "@" chain_id ] [ "/" function_name ] [ "?" parameters ]
+    // example of transfer jmes:0xfb6916095ca1df60bb79Ce92ce3ea74c37c5d359/transfer?address=0xfb6916095ca1df60bb79Ce92ce3ea74c37c5d359=1
+    // example of request jmes:0xfb6916095ca1df60bb79Ce92ce3ea74c37c5d359?value=2.014e18 
 
+    
 export default function WalletReceiveScreen({ navigation }: Props) {
-
-
+ 
     const address = useStoreState((state) => state.accounts[0].address)
     const username = useStoreState((state) => state.user.username)
+    //const [payload, setPayload] = useState<IQRCodePayload>()
     const [payload, setPayload] = useState(null)
-    const [amount, setAmount] = useState('');
+    const [amount, setAmount] = useState(0);
 
+    const parsePayload = async () => { //currently resembles a request amount transaction
+        const notatedAmount = await notateWeiValue(amount)
+        const parsedPayload = `${SCHEMA_PREFIX}${address}?value=${notatedAmount}`
+        
+        setPayload(parsedPayload)
+        console.log("payload", parsedPayload)
+    }
+    
     const handleGenerateQR = async () => {
         if (amount) {
-            setPayload({ amount:amount, address:address})
+        //implement case switch to determine type of transaction being made (request,transfer, etc)
+            await parsePayload()
         }
         else{
             alert("Please enter a valid Amount");
@@ -77,19 +93,16 @@ export default function WalletReceiveScreen({ navigation }: Props) {
                 <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)"/>
                
                 <SafeAreaView>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={setAmount}
-                        value={amount}
-                        placeholder="Enter an amount"
-                    />
+                    <TextInput style={styles.input} placeholder="Enter an amount" onChangeText={(val) => setAmount(val)}/>
                     {payload ? 
                         <GeneratedQRCode payload={payload}/> 
                     : null
                     }
                 </SafeAreaView>
                 <Pressable
-                    onPress={() => handleGenerateQR() }
+                    onPress={async() => { 
+                        await handleGenerateQR() 
+                    }}
                     style={styles.button}>
                     <Text style={styles.buttonText}>Generate QR Code</Text>
                 </Pressable>

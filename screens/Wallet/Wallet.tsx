@@ -65,12 +65,12 @@ export default function WalletScreen({ navigation }: Props) {
         });
         const parsedResponse = await rawResponse.json()
         const balance = parsedResponse[0].balance.toString()
-        console.log("balance:", balance)
+        //console.log("balance:", balance)
         setBalance(balance);
 
         const convertedBalance = (parseInt(balance) * 0.1412840103).toString();
 
-        console.log({convertedBalance});
+        //console.log({convertedBalance});
        
         setBalanceEur(parseFloat(convertedBalance).toFixed(2))
     }
@@ -81,32 +81,10 @@ export default function WalletScreen({ navigation }: Props) {
             if(shouldFetch){
                 fetchFromLocal();
             }
-            console.log('interval');
+            //console.log('interval');
         }, 10*1000)
     },[updateStoreState])
 
-   /* useEffect(() => {
-        async function fetch() {
-            const fetchedBalance = await fetchAddressBalance(address);
-            console.log({fetchedBalance});
-            setBalance(Web3.utils.fromWei(fetchedBalance, 'ether'));
-
-            const convertedBalance = (parseInt(fetchedBalance) * 0.1412840103).toString();
-            
-            console.log({convertedBalance});
-            setBalanceEur(parseFloat(Web3.utils.fromWei(convertedBalance, 'ether')).toFixed(2))
-
-        }
-
-        fetch();
-        setInterval(()=>{
-            if(shouldFetch){
-                fetch();
-            }
-            console.log('interval');
-        }, 10*1000)
-    }, [updateStoreState]);
-*/
     return (
         <View style={styles.container}>
             <Background4>

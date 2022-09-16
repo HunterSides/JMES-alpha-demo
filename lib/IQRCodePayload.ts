@@ -1,4 +1,8 @@
 export interface IQRCodePayload {
-    address: string
-    amount: string
+    prefix: string;
+    address: string;
+    amount: string | number;
+    function?: string;
+    chain_id?: string;
+   
 }
