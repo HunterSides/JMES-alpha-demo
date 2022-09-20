@@ -54,7 +54,7 @@ export default function WalletScreen({ navigation }: Props) {
     async function fetchFromLocal() {
 
         const path = `${LOCAL_SERVER_PATH}/users?address=${account.address}`;
-
+        console.log(path, "CURRENT PATH")
         const rawResponse = await fetch(path , {
             method: 'GET',
             headers: {
@@ -77,11 +77,11 @@ export default function WalletScreen({ navigation }: Props) {
 
     useEffect(() => {
         fetchFromLocal()
-        setInterval(()=>{
+   setInterval(()=>{
             if(shouldFetch){
                 fetchFromLocal();
             }
-            //console.log('interval');
+            console.log('interval');
         }, 10*1000)
     },[updateStoreState])
 
