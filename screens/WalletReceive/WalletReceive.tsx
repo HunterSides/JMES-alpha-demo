@@ -50,11 +50,6 @@ export default function WalletReceiveScreen({ navigation }: Props) {
             amount: amount
         })
         setPayload(payloadData)
-        /*
-        setPayload({
-            data: payloadData,
-        })
-        */
       
     }
     

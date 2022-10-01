@@ -77,12 +77,12 @@ export default function WalletScreen({ navigation }: Props) {
 
     useEffect(() => {
         fetchFromLocal()
-   setInterval(()=>{
+   /*setInterval(()=>{
             if(shouldFetch){
                 fetchFromLocal();
             }
             console.log('interval');
-        }, 10*1000)
+        }, 10*1000)*/
     },[updateStoreState])
 
     return (
