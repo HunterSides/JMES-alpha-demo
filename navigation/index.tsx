@@ -3,6 +3,8 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
+//@ts-nocheck
+
 import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
@@ -202,40 +204,13 @@ function BottomTabNavigator() {
           tabBarActiveBackgroundColor: "#222",
           tabBarInactiveBackgroundColor: "#000",
 
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          header: () => <Header navigation={navigation} />,
-        })}
-      />
-      {/*
-      <BottomTab.Screen
-        name="Marketplace"
-        style={{ backgroundColor: "#000" }}
-        component={MarketplaceScreen}
-        options={({ navigation }: RootTabScreenProps<"Marketplace">) => ({
-          title: "Marketplace",
-          tabBarLabel: "",
-          tabBarActiveBackgroundColor: "#222",
-          tabBarInactiveBackgroundColor: "#000",
-          tabBarIcon: ({ color }) => <TabBarIcon name="shop" color={color} />,
-          header: () => <Header navigation={navigation} />,
-        })}
-      />
-      <BottomTab.Screen
-        name="Events"
-        style={{ backgroundColor: "#000" }}
-        component={EventsScreen}
-        options={({ navigation }: RootTabScreenProps<"Events">) => ({
-          title: "Events",
-          tabBarLabel: "",
-          tabBarActiveBackgroundColor: "#222",
-          tabBarInactiveBackgroundColor: "#000",
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="calendar" color={color} />
+            <TabBarIcon name="home" color={color} />
           ),
           header: () => <Header navigation={navigation} />,
         })}
-      /> 
-      */}
+      />
+
       <BottomTab.Screen
         name="Scanner"
         style={{ backgroundColor: "#000" }}

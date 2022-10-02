@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 import { Background, Button } from "../../components";
-import Background4 from "../../components/Background4/Background4";
 import { Navigation } from "../../types";
 import { View, Text } from "react-native";
 

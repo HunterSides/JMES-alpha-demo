@@ -39,6 +39,31 @@ export default function HomeScreen({ navigation }: Props) {
       name: "Collage",
       uri: require("../../assets/images/genres/Collage.jpg"),
     },
+    {
+      key: 3,
+      name: "Design",
+      uri: require("../../assets/images/genres/Design.jpeg"),
+    },
+    {
+      key: 4,
+      name: "Digital",
+      uri: require("../../assets/images/genres/Digital.jpeg"),
+    },
+    {
+      key: 5,
+      name: "Expressionism",
+      uri: require("../../assets/images/genres/Expressionism.jpeg"),
+    },
+    {
+      key: 6,
+      name: "Generative",
+      uri: require("../../assets/images/genres/Generative.png"),
+    },
+    {
+      key: 7,
+      name: "Impressionsim",
+      uri: require("../../assets/images/genres/Impressionsim.jpeg"),
+    },
   ]);
 
   let [fontsLoaded] = useFonts({
@@ -50,8 +75,11 @@ export default function HomeScreen({ navigation }: Props) {
     Roboto_500Medium,
     Roboto_900Black,
   });
-  /**
-   *  <ScrollView>
+
+  return (
+    <View style={styles.container}>
+      <Background4>
+        <ScrollView>
           {assets.map((item) => {
             return (
               <View
@@ -76,10 +104,6 @@ export default function HomeScreen({ navigation }: Props) {
             );
           })}
         </ScrollView>
-   */
-  return (
-    <View style={styles.container}>
-      <Background4>
         <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
         {/* Use a light status bar on iOS to account for the black space above the modal */}
       </Background4>
@@ -92,6 +116,45 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  title: {
+    color: "#FFF",
+    fontSize: 36,
+    fontFamily: "Comfortaa_300Light",
+  },
+  description: {
+    fontWeight: "bold",
+    flex: 0,
+    color: "#FFF",
+    fontSize: 16,
+    lineHeight: 18,
+    paddingTop: 15,
+    // alignSelf: "flex-start",
+    fontFamily: "Roboto_500Medium",
+    textTransform: "uppercase",
+    width: "70%",
+    alignSelf: "center",
+  },
+  section: {
+    fontWeight: "bold",
+    color: "#FFF",
+    flex: 0,
+    fontSize: 24,
+    lineHeight: 28,
+    paddingTop: 15,
+    paddingBottom: 25,
+    // alignSelf: "flex-start",
+    textTransform: "uppercase",
+    width: "70%",
+    alignSelf: "center",
+    textAlign: "center",
+    fontFamily: "Roboto_500Medium",
+    textTransform: "uppercase",
+  },
+  item: {
+    fontWeight: "bold",
+    color: "#FFF",
+    alignSelf: "center",
   },
 
   separator: {

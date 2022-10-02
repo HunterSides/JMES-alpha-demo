@@ -10,7 +10,7 @@
     "typeRoots": ["index.d.ts"],
     "types": ["node", "jest"]
   },
-  "include": ["**/*.ts", "**/*.tsx", "screens/WalletSend/WalletSend copy.jsx", "api/index.js"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": [
     "node_modules",
     "babel.config.js",
