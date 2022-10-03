@@ -31,41 +31,76 @@ export default function HomeScreen({ navigation }: Props) {
   const [assets, setAssets] = useState([
     {
       key: 1,
-      name: "Abstract",
+      title: "Abstract",
+      price: "2,813.30",
+      shares: "800",
+      description:
+        "Money can't buy happiness but it's more comfortable to cry in Mercedes than a bicycle. #deklart #art #mercedes #nft #motivation #success",
       uri: require("../../assets/images/genres/Abstract.jpeg"),
+      mocked: require("../../assets/images/mocked/Abstract.jpg"),
     },
     {
       key: 2,
-      name: "Collage",
+      title: "Collage",
+      price: "8,004",
+      shares: "800",
+      description:
+        "Money can't buy happiness but it's more comfortable to cry in Mercedes than a bicycle. #deklart #art #mercedes #nft #motivation #success",
       uri: require("../../assets/images/genres/Collage.jpg"),
+      mocked: require("../../assets/images/mocked/Collage.jpg"),
     },
     {
       key: 3,
-      name: "Design",
+      title: "Design",
+      price: "2,813.30",
+      shares: "800",
+      description:
+        "Money can't buy happiness but it's more comfortable to cry in Mercedes than a bicycle. #deklart #art #mercedes #nft #motivation #success",
       uri: require("../../assets/images/genres/Design.jpeg"),
+      mocked: require("../../assets/images/mocked/Design.jpg"),
     },
     {
       key: 4,
-      name: "Digital",
+      title: "Digital",
+      price: "2,813.30",
+      shares: "800",
+      description:
+        "Money can't buy happiness but it's more comfortable to cry in Mercedes than a bicycle. #deklart #art #mercedes #nft #motivation #success",
       uri: require("../../assets/images/genres/Digital.jpeg"),
+      mocked: require("../../assets/images/mocked/Digital.jpg"),
     },
     {
       key: 5,
-      name: "Expressionism",
+      title: "Expressionism",
+      price: "2,813.30",
+      shares: "800",
+      description:
+        "Money can't buy happiness but it's more comfortable to cry in Mercedes than a bicycle. #deklart #art #mercedes #nft #motivation #success",
       uri: require("../../assets/images/genres/Expressionism.jpeg"),
+      mocked: require("../../assets/images/mocked/Expressionism.jpg"),
     },
     {
       key: 6,
-      name: "Generative",
+      title: "Generative",
+      price: "2,813.30",
+      shares: "800",
+      description:
+        "Money can't buy happiness but it's more comfortable to cry in Mercedes than a bicycle. #deklart #art #mercedes #nft #motivation #success",
       uri: require("../../assets/images/genres/Generative.png"),
+      mocked: require("../../assets/images/mocked/Generative.jpg"),
     },
     {
       key: 7,
-      name: "Impressionsim",
-      uri: require("../../assets/images/genres/Impressionsim.jpeg"),
+      title: "Impressionism",
+      price: "2,813.30",
+      shares: "800",
+      description:
+        "Money can't buy happiness but it's more comfortable to cry in Mercedes than a bicycle. #deklart #art #mercedes #nft #motivation #success",
+      uri: require("../../assets/images/genres/Impressionism.jpeg"),
+      mocked: require("../../assets/images/mocked/Impressionism.jpg"),
     },
   ]);
-
+  const handleRedirect = async () => {};
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
     Comfortaa_400Regular,
@@ -89,7 +124,27 @@ export default function HomeScreen({ navigation }: Props) {
                   backgroundColor: "transparent",
                 }}
               >
-                <Image source={item.uri} style={{ width: 375, height: 267 }} />
+                <Pressable
+                  onPress={async () => {
+                    // @ts-ignore
+                    return navigation.navigate({
+                      name: "Artwork",
+                      params: {
+                        image: item.uri,
+                        mocked: item.mocked,
+                        title: item.title,
+                        price: item.price,
+                        shares: item.shares,
+                      },
+                    });
+                  }}
+                >
+                  <Image
+                    source={item.uri}
+                    style={{ width: 375, height: 267 }}
+                  />
+                </Pressable>
+
                 <Text
                   style={{
                     textAlign: "left",
@@ -98,7 +153,7 @@ export default function HomeScreen({ navigation }: Props) {
                     paddingLeft: 4,
                   }}
                 >
-                  {item.name}
+                  {item.title}
                 </Text>
               </View>
             );

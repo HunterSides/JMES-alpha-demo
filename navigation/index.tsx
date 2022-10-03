@@ -46,6 +46,7 @@ import SendAssetScreen from "../screens/SendAsset/SendAsset";
 import SendAssetConfirmScreen from "../screens/SendAssetConfirm/SendAssetConfirm";
 import OnboardingScreen from "../screens/Onboarding/Onboarding";
 import SetPinScreen from "../screens/SetPin/SetPin";
+import ArtworkScreen from "../screens/Artwork/Artwork";
 import { useStoreState } from "../hooks/storeHooks";
 
 export default function Navigation({
@@ -119,6 +120,7 @@ function RootNavigator() {
           {/*        <Header navigation={navigation} />*/}
           {/*    ),*/}
           {/*})*/}
+          <Stack.Screen name="Artwork" component={ArtworkScreen} />
           <Stack.Screen
             name="WalletSendConfirm"
             component={WalletSendConfirmScreen}
@@ -204,9 +206,7 @@ function BottomTabNavigator() {
           tabBarActiveBackgroundColor: "#222",
           tabBarInactiveBackgroundColor: "#000",
 
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="home" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           header: () => <Header navigation={navigation} />,
         })}
       />
