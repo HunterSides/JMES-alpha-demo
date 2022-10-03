@@ -90,63 +90,113 @@ export default function CreateAssetScreen({ navigation }: Props) {
   };
 
   return (
-    <View style={styles.container}>
-      <Background4>
-        <Text style={styles.secondTitle}>Title</Text>
-        <SafeAreaView>
+    <Background4>
+      <View style={styles.contentContainer}>
+        {image ? (
+          <Image source={{ uri: image }} style={{ width: 381, height: 254 }} />
+        ) : (
+          <View
+            style={{
+              width: 381,
+              height: 254,
+              backgroundColor: "transparent",
+            }}
+          />
+        )}
+        <View style={styles.uploadButtonContainer}>
+          <Pressable style={styles.uploadButton} onPress={handleUpload}>
+            <Text style={styles.buttonText}>Upload</Text>
+          </Pressable>
+        </View>
+      </View>
+      <View style={styles.inputContainer}>
+        <View style={styles.titleInputContainer}>
+          <Text
+            style={{ fontSize: 15, textTransform: "uppercase", color: "white" }}
+          >
+            Title
+          </Text>
           <TextInput
-            style={styles.input}
+            style={styles.titleInput}
             onChangeText={onChangeTitle}
             value={title}
             placeholder="Enter a title"
           />
-
-          <Text style={styles.secondTitle}>Image</Text>
-        </SafeAreaView>
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "transparent",
-          }}
-        >
-          {image && (
-            <Image
-              source={{ uri: image }}
-              style={{ width: 200, height: 200 }}
-            />
-          )}
-          <Pressable style={styles.button} onPress={handleUpload}>
-            <Text style={styles.buttonText}>Upload</Text>
-          </Pressable>
         </View>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeShares}
-          value={shares}
-          placeholder="Enter # of shares"
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangePrice}
-          value={price}
-          placeholder="Enter a price"
-        />
+        <View style={styles.priceInputContainer}>
+          <Text
+            style={{ fontSize: 15, textTransform: "uppercase", color: "white" }}
+          >
+            Price
+          </Text>
+          <TextInput
+            style={styles.priceInput}
+            onChangeText={onChangePrice}
+            value={price}
+            placeholder="Enter a price"
+          />
+        </View>
+        <View style={styles.sharesInputContainer}>
+          <Text
+            style={{ fontSize: 15, textTransform: "uppercase", color: "white" }}
+          >
+            Shares
+          </Text>
+          <TextInput
+            style={styles.sharesInput}
+            onChangeText={onChangeShares}
+            value={shares}
+            placeholder="Enter # of shares"
+          />
+        </View>
+        <View style={styles.genreInputContainer}>
+          <Text
+            style={{ fontSize: 15, textTransform: "uppercase", color: "white" }}
+          >
+            Genre
+          </Text>
+          <TextInput
+            style={styles.genreInput}
+            onChangeText={onChangeShares}
+            value={null}
+            placeholder="Genre"
+          />
+        </View>
+        <View style={styles.aboutInputContainer}>
+          <Text
+            style={{ fontSize: 15, textTransform: "uppercase", color: "white" }}
+          >
+            About
+          </Text>
+          <TextInput
+            style={styles.aboutInput}
+            onChangeText={onChangeShares}
+            value={null}
+            placeholder="Money can't buy happiness but it's more comfortable to cry in Mercedes than a bicycle. #deklart #art #mercedes #nft #motivation #success"
+          />
+        </View>
+      </View>
+
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+      <View style={styles.mintButtonContainer}>
         <Pressable
           onPress={async () => {
             await performNFTMint();
-
             return navigation.navigate("CreateAssetConfirm");
           }}
-          style={styles.button}
+          style={styles.mintButton}
         >
           <Text style={styles.buttonText}>Mint</Text>
         </Pressable>
-        {/* Use a light status bar on iOS to account for the black space above the modal */}
-        <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
-      </Background4>
-    </View>
+      </View>
+
+      {/* Use a light status bar on iOS to account for the black space above the modal */}
+      <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
+    </Background4>
   );
 }
 
@@ -157,100 +207,142 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "center",
   },
-  buttonText: {
-    fontSize: 24,
+  contentContainer: {
+    flex: 1,
+    width: "100%",
+    backgroundColor: "transparent",
+  },
 
+  uploadButtonContainer: {
+    flexDirection: "row",
+    width: 84,
+    height: 31,
+    paddingBottom: 9,
+    paddingTop: 13,
+    margin: "auto",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
+  },
+  mintButtonContainer: {
+    flexDirection: "row",
+    width: 345,
+    height: 52,
+    paddingBottom: 9,
+    paddingTop: 10,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    backgroundColor: "transparent",
+  },
+
+  buttonText: {
+    fontSize: 16,
+    margin: "auto",
     borderColor: "black",
     textTransform: "uppercase",
     fontFamily: "Roboto_900Black",
   },
-  iconImageView: {
-    flexDirection: "row",
-  },
-  button: {
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+
+  mintButton: {
     backgroundColor: "#FFFFFF",
     borderRadius: 6,
     color: "#000000",
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 25,
-    paddingRight: 25,
-    fontSize: 24,
+    paddingTop: 17,
+    paddingBottom: 16,
+    margin: "auto",
+    fontSize: 16,
+    width: "100%",
     textTransform: "uppercase",
     fontFamily: "Roboto_900Black",
   },
-  title: {
-    fontSize: 36,
-    fontFamily: "Comfortaa_300Light",
-  },
-  input: {
-    backgroundColor: "white",
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-  secondTitle: {
-    fontSize: 36,
-    fontFamily: "Comfortaa_300Light",
-    paddingTop: 40,
-  },
-  balanceJMES: {
-    fontWeight: "bold",
-    flex: 0,
-    fontSize: 24,
-    lineHeight: 28,
-    paddingTop: 15,
-    alignSelf: "center",
-    fontFamily: "Roboto_900Black",
+
+  uploadButton: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 6,
+    color: "#000000",
+    paddingTop: 7,
+    paddingBottom: 7,
+    paddingLeft: 10,
+    paddingRight: 10,
+    fontSize: 16,
+    width: "100%",
+    height: 31,
     textTransform: "uppercase",
-  },
-  balanceEUR: {
-    fontWeight: "bold",
-    flex: 0,
-    fontSize: 24,
-    lineHeight: 28,
-    paddingTop: 15,
-    alignSelf: "center",
     fontFamily: "Roboto_900Black",
-    textTransform: "uppercase",
-  },
-  buttonImage: {
-    padding: 10,
-  },
-  iconImage: {
-    width: 30,
-    height: 30,
-    margin: 10,
-  },
-  section: {
-    fontWeight: "bold",
-    flex: 1,
-    fontSize: 24,
-    lineHeight: 28,
-    paddingTop: 15,
-    alignSelf: "flex-start",
-    fontFamily: "Roboto_900Black",
-    textTransform: "uppercase",
-  },
-  noAssetText: {
-    fontWeight: "bold",
-    flex: 1,
-    fontSize: 24,
-    lineHeight: 28,
-    paddingTop: 15,
-    alignSelf: "center",
-    fontFamily: "Roboto_900Black",
-    textTransform: "uppercase",
   },
 
   separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+    height: 3,
+    width: "100%",
+  },
+
+  inputContainer: {
+    flexDirection: "column",
+
+    alignItems: "flex-end",
+    backgroundColor: "#2B2B2B",
+    width: 381,
+    height: 345,
+  },
+  titleInputContainer: {
+    backgroundColor: "transparent",
+    paddingRight: 15,
+    paddingTop: 10,
+    width: 270,
+  },
+  titleInput: {
+    backgroundColor: "#5B5B5B",
+    borderRadius: 6,
+    width: "100%",
+    height: 34,
+  },
+  priceInputContainer: {
+    backgroundColor: "transparent",
+    paddingRight: 15,
+    paddingTop: 22,
+    paddingBottom: 22,
+    width: 161,
+  },
+  priceInput: {
+    backgroundColor: "#5B5B5B",
+    borderRadius: 6,
+    width: "100%",
+    height: 34,
+  },
+  sharesInputContainer: {
+    backgroundColor: "transparent",
+    paddingRight: 15,
+    paddingBottom: 22,
+    width: 161,
+  },
+  sharesInput: {
+    backgroundColor: "#5B5B5B",
+    borderRadius: 6,
+    width: "100%",
+    height: 34,
+  },
+  genreInputContainer: {
+    backgroundColor: "transparent",
+    paddingRight: 15,
+    paddingBottom: 22,
+    width: 205,
+  },
+  genreInput: {
+    backgroundColor: "#5B5B5B",
+    borderRadius: 6,
+    width: "100%",
+    height: 36,
+  },
+  aboutInputContainer: {
+    backgroundColor: "transparent",
+    paddingRight: 15,
+    paddingBottom: 22,
+    width: 275,
+  },
+  aboutInput: {
+    backgroundColor: "#5B5B5B",
+    borderRadius: 6,
+    width: "100%",
+    height: 103,
   },
 });
